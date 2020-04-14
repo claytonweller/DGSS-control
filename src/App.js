@@ -52,9 +52,7 @@ class App extends React.Component {
 
   sourceClick() {
     console.log('SOURCE CLICK')
-    const params = {
-      source: 'control',
-    }
+    const params = { source: 'control' }
     client.send(JSON.stringify({ action: 'source', params }))
   }
 
