@@ -2,8 +2,8 @@ import { client } from '../index'
 
 export const manageMessage = async (message, component) => {
   let action = Object.keys(actionHash).includes(message.action)
-    ? actionHash.defaultAction
-    : actionHash[message.action]
+    ? actionHash[message.action]
+    : actionHash.defaultAction
 
   try {
     return await action(message.params, component)
