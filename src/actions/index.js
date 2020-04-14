@@ -1,10 +1,10 @@
 import { client } from '../index'
 
 export const manageMessage = async (message, component) => {
-  let action = actionHash.defaultAction
-  if (Object.keys(actionHash).includes(message.action)) {
-    action = actionHash[message.action]
-  }
+  let action = Object.keys(actionHash).includes(message.action)
+    ? actionHash.defaultAction
+    : actionHash[message.action]
+
   try {
     return await action(message.params, component)
   } catch (e) {
@@ -18,9 +18,9 @@ const actionHash = {
   defaultAction
 }
 
-function defaultAction(params, component) { console.log('DEFAULT \n', params, component.state) }
+async function defaultAction(params, component) { console.log('DEFAULT \n', params, component.state) }
 
-function localServer(params, component) {
+async function localServer(params, component) {
   console.log('local-server\n', params)
   const sendParams = {
     source: 'control'
@@ -29,7 +29,7 @@ function localServer(params, component) {
   component.setState({ currentConn: params })
 }
 
-function connectionUpdate(params, component) {
+async function connectionUpdate(params, component) {
   console.log('conn-update\n', params)
   component.setState({ currentConn: params })
 }
