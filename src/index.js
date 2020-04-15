@@ -4,8 +4,9 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { w3cwebsocket as W3CWebSocket } from "websocket";
-export const client = new W3CWebSocket('ws://127.0.0.1:8080');
-// export const client = new W3CWebSocket('wss://g298l0uqlc.execute-api.us-east-1.amazonaws.com/dev');
+import { WS_URL } from './config'
+
+export const client = new W3CWebSocket(WS_URL);
 
 ReactDOM.render(
   <React.StrictMode>

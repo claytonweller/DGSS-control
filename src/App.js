@@ -2,11 +2,14 @@ import React from 'react';
 import './App.css';
 import { manageMessage } from './actions';
 import { client } from './index'
+import { WebsocketTestButtons } from './components/WebsocketTestButtons';
+import { Performance } from './components/Performance';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      performance: {},
       currentConn: {
         id: "",
         performance_id: 0,
@@ -34,37 +37,14 @@ class App extends React.Component {
     };
   }
 
-  allClick() {
-    console.log('ALL CLICK')
-    const params = { source: 'control' }
-    client.send(JSON.stringify({ action: 'all', params }))
-  }
-
-  randClick() {
-    console.log('RANDOM CLICK')
-    const params = {
-      source: 'control',
-      id: this.state.currentConn.id
-    }
-    console.log('PARAMS', params)
-    client.send(JSON.stringify({ action: 'random', params }))
-  }
-
-  sourceClick() {
-    console.log('SOURCE CLICK')
-    const params = { source: 'control' }
-    client.send(JSON.stringify({ action: 'source', params }))
-  }
-
   render() {
     return (
       <div className="App" >
         <h1>Control</h1>
-        <button onClick={() => this.allClick()}>To All</button>
-        <button onClick={() => this.randClick()}>To Random</button>
-        <button onClick={() => this.sourceClick()}>To Source</button>
-        <h1>Current count {this.state.count}</h1>
+        <Performance performance={this.state.performance} />
+        <h3>State display</h3>
         <div style={{ width: '95vw', wordWrap: 'break-word' }}>{JSON.stringify(this.state.currentConn)}</div>
+        <WebsocketTestButtons />
       </div>
     )
   }
