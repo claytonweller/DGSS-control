@@ -43,5 +43,5 @@ async function localServer(params, component) {
 
 async function connectionUpdate(params, component) {
   console.log('conn-update\n', params)
-  component.setState({ currentConn: params })
+  component.setState({ currentConn: params.currentConnection })
 }
