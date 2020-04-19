@@ -13,26 +13,31 @@ export const manageMessage = async (message, component) => {
 }
 
 const actionHash = {
-  'local-server': localServer,
-  'conn-update': connectionUpdate,
-  'performance-created': performanceCreated,
-  'performance-ended': performanceEnded,
+  'local-server': localServerAction,
+  'conn-update': connectionUpdateAction,
+  'performance-created': performanceCreatedAction,
+  'performance-ended': performanceEndedAction,
+  'performance-joined': performanceJoinedAction,
   defaultAction
 }
 
 async function defaultAction(params, component) { console.log('DEFAULT \n', params, component.state) }
 
-async function performanceCreated(params, component) {
+async function performanceJoinedAction(params, component) {
+  console.log(`${params.attendee.name} joined the audience`)
+}
+
+async function performanceCreatedAction(params, component) {
   console.log('Performance Created \n', params)
   component.setState({ performance: params })
 }
 
-async function performanceEnded(parms, component) {
+async function performanceEndedAction(parms, component) {
   console.log('Performance Ended')
   component.setState({ performance: {} })
 }
 
-async function localServer(params, component) {
+async function localServerAction(params, component) {
   console.log('local-server\n', params)
   const sendParams = {
     source: 'control'
@@ -41,7 +46,7 @@ async function localServer(params, component) {
   component.setState({ currentConn: params })
 }
 
-async function connectionUpdate(params, component) {
+async function connectionUpdateAction(params, component) {
   console.log('conn-update\n', params)
   component.setState({ currentConn: params.currentConnection })
 }
