@@ -42,7 +42,7 @@ class App extends React.Component {
       <div className="App" >
         <h1>Control</h1>
         <Performance performance={this.state.performance} />
-        <h3>State display</h3>
+        <h3>Connection display</h3>
         <div style={{ width: '95vw', wordWrap: 'break-word' }}>{JSON.stringify(this.state.currentConn)}</div>
         <WebsocketTestButtons />
       </div>
