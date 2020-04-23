@@ -1,5 +1,5 @@
 import React from 'react'
-import { client } from '..'
+import { client } from '../../'
 export function PerformanceEnder({ performance }) {
   function endPerformanceClick() {
     const params = {

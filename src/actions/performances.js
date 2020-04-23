@@ -14,10 +14,10 @@ async function performanceJoinedAction(params, component) {
 }
 async function performanceCreatedAction(params, component) {
   console.log('Performance Created \n', params)
-  component.setState({ performance: params })
+  component.setState(params)
 }
 
 async function performanceEndedAction(parms, component) {
   console.log('Performance Ended')
-  component.setState({ performance: {} })
+  component.setState({ performance: {}, currentModule: { module: {}, instance: {} } })
 }

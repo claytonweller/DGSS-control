@@ -1,5 +1,5 @@
 import React from 'react'
-import { client } from '..'
+import { client } from '../../'
 export function PerformanceCreator(params) {
 
   function createPerformanceClick() {
