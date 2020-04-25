@@ -12,10 +12,10 @@
     "websocket": "^1.0.31"
   },
   "scripts": {
-    "start": "eval $(egrep -v '^#' .env | xargs) react-scripts start",
-    "build": "eval $(egrep -v '^#' .env | xargs) react-scripts build",
-    "test": "eval $(egrep -v '^#' .env | xargs) react-scripts test",
-    "eject": "eval $(egrep -v '^#' .env | xargs) react-scripts eject"
+    "start": "PORT=3000 react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -31,5 +31,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0"
   }
 }
