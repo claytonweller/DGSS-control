@@ -3,7 +3,7 @@ import './App.css';
 import { manageMessage } from './actions';
 import { client } from './index';
 import { Performance } from './components/Performance/';
-import { Preshow } from './components/modules/Preshow/';
+import { Module } from './components/modules/';
 
 class App extends React.Component {
   constructor(props) {
@@ -42,29 +42,11 @@ class App extends React.Component {
     };
   }
 
-  nextModule() {
-    const payload = JSON.stringify({
-      action: 'determine-next-module',
-      params: {
-        currentModule: this.state.currentModule,
-      },
-    });
-    client.send(payload);
-  }
-
   render() {
-    const moduleHash = {
-      preshow: <Preshow nextModule={() => this.nextModule()} moduleState={this.state.moduleState} />,
-      default: <div>No show yet</div>,
-    };
-
-    const currentModuleTitle = this.state.currentModule.module.title;
-    const moduleInterface = currentModuleTitle ? moduleHash[currentModuleTitle] : moduleHash.default;
-
     return (
       <div className="App">
         <h1>Control</h1>
-        {moduleInterface}
+        <Module currentModule={this.state.currentModule} moduleState={this.state.moduleState} />
         <Performance performance={this.state.performance} />
       </div>
     );
