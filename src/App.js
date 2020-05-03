@@ -42,9 +42,19 @@ class App extends React.Component {
     };
   }
 
+  nextModule() {
+    const payload = JSON.stringify({
+      action: 'determine-next-module',
+      params: {
+        currentModule: this.state.currentModule,
+      },
+    });
+    client.send(payload);
+  }
+
   render() {
     const moduleHash = {
-      preshow: <Preshow moduleState={this.state.moduleState} />,
+      preshow: <Preshow nextModule={() => this.nextModule()} moduleState={this.state.moduleState} />,
       default: <div>No show yet</div>,
     };
 
