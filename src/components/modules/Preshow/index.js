@@ -1,23 +1,24 @@
 import React from 'react';
-import { client } from '../../'
+import { client } from '../../../';
+import { CurrentAudience } from './CurrentAudience';
 
 export function Preshow(props) {
-
   const startPerformance = () => {
     const payload = JSON.stringify({
       action: 'preshow-start-performance',
-      params: {}
-    })
-    client.send(payload)
-  }
+      params: {},
+    });
+    client.send(payload);
+  };
 
   return (
     <div>
       <h3>Preshow</h3>
-      <div>Expected audience count</div>
-      <div>Current audience list</div>
-      <div>Important Questions data</div>
+      <CurrentAudience attendees={props.moduleState.attendees} />
+      <p></p>
+      <div>Audience Data</div>
+      <div>Presales data</div>
       <button onClick={() => startPerformance()}>Start</button>
     </div>
-  )
+  );
 }
