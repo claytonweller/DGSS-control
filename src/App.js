@@ -46,7 +46,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <h1>Control</h1>
-        <Module currentModule={this.state.currentModule} moduleState={this.state.moduleState} />
+        <Module
+          currentConn={this.state.currentConn}
+          currentModule={this.state.currentModule}
+          moduleState={this.state.moduleState}
+        />
         <Performance performance={this.state.performance} />
       </div>
     );

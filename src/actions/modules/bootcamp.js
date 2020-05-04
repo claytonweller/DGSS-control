@@ -1,7 +1,14 @@
 export const bootcampActionHash = {
-  'bootcamp-test': testAction,
+  'bootcamp-test-started': testStartedAction,
+  'bootcamp-test-ended': testEndedAction,
 };
 
-function testAction(params, component) {
-  console.log('TEST', params);
+function testStartedAction(params, component) {
+  console.log('Test Started', params);
+  component.setState({ moduleState: { testing: true } });
+}
+
+function testEndedAction(params, component) {
+  console.log('Test Ended', params);
+  component.setState({ moduleState: { testing: false } });
 }
