@@ -9,7 +9,7 @@ export function Bootcamp({ moduleState, currentConn, nextModule }) {
     client.send(payload);
   };
 
-  const startTestButton = <button onClick={() => click('bootcamp-start-test')}>TEST</button>;
+  const startTestButton = <button onClick={() => click('bootcamp-start-test')}>START TEST</button>;
   const endTestButton = <button onClick={() => click('bootcamp-end-test')}>END TEST</button>;
 
   const testButton = moduleState.testing ? endTestButton : startTestButton;
