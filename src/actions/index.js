@@ -3,7 +3,11 @@ import { utilityActionHash } from './utility';
 import { moduleActionHash } from './modules';
 
 export const manageMessage = async (message, component) => {
-  let action = Object.keys(actionHash).includes(message.action) ? actionHash[message.action] : actionHash.defaultAction;
+  console.log('Action: ', message.action);
+
+  const action = Object.keys(actionHash).includes(message.action)
+    ? actionHash[message.action]
+    : actionHash.defaultAction;
 
   try {
     return await action(message.params, component);
