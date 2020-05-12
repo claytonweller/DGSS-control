@@ -2,6 +2,7 @@ import React from 'react';
 import { Boatrace } from './Boatrace/';
 import { Preshow } from './Preshow/';
 import { Bootcamp } from './Bootcamp/';
+import { ModulePicker } from './ModulePicker';
 import { client } from '../../';
 
 export function Module({ currentModule, currentConn, moduleState }) {
@@ -30,5 +31,12 @@ export function Module({ currentModule, currentConn, moduleState }) {
       ? moduleHash[currentModuleTitle]
       : moduleHash.default;
 
-  return moduleInterface;
+  return (
+    <div>
+      <div>{moduleInterface}</div>
+      <div>
+        <ModulePicker moduleTitles={Object.keys(moduleHash)} currentModule={currentModule} />
+      </div>
+    </div>
+  );
 }

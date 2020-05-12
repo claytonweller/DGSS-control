@@ -2,7 +2,7 @@
   text-align: center;
 }
 
-button {
-  background-color: pink;
+button, input, select {
+  background-color: lightcyan;
   margin: 2px;
 }
