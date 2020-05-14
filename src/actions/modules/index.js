@@ -11,7 +11,7 @@ export const moduleActionHash = {
 };
 
 function startNextModuleAction(params, component) {
-  const { currentModule, performance } = params;
+  const { currentModule, performance, attendeeCount } = params;
 
   console.log('Starting module:', currentModule.module.title);
 
@@ -19,5 +19,6 @@ function startNextModuleAction(params, component) {
     moduleState: {},
     currentModule,
     performance,
+    attendeeCount,
   });
 }

@@ -9,6 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      attendeeCount: 0,
       currentModule: {
         module: {},
         instance: {},
