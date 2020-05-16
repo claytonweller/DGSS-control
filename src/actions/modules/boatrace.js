@@ -1,15 +1,23 @@
 export const boatraceActionHash = {
   'boatrace-show-title': showTitleAction,
+  'boatrace-ready-to-board': readyToBoardAction,
 };
 
 function showTitleAction(params, component) {
-  console.log('Template', params);
-  console.warn(component.state);
-
   component.setState({
     moduleState: {
-      titleVisible: true,
+      step: 'title',
       audienceCount: component.state.attendeeCount,
+    },
+  });
+}
+
+function readyToBoardAction(params, component) {
+  console.warn(params);
+  component.setState({
+    moduleState: {
+      step: 'boarding',
+      audienceCount: component.state.audienceCount,
     },
   });
 }

@@ -17,7 +17,7 @@ export function Module({ currentModule, currentConn, moduleState }) {
   };
 
   const moduleHash = {
-    boatrace: <Boatrace moduleState={moduleState} />,
+    boatrace: <Boatrace moduleState={moduleState} currentModule={currentModule} />,
     bootcamp: <Bootcamp currentConn={currentConn} nextModule={nextModule} moduleState={moduleState} />,
     preshow: <Preshow nextModule={nextModule} moduleState={moduleState} />,
     // TODO default will need some functionality at some point. To allow us to get into a module.

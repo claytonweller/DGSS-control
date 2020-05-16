@@ -9,6 +9,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      activePerformances: [],
       attendeeCount: 0,
       currentModule: {
         module: {},
@@ -43,6 +44,10 @@ class App extends React.Component {
     };
   }
 
+  setPerformance(performance) {
+    this.setState({ performance });
+  }
+
   render() {
     return (
       <div className="App">
@@ -52,7 +57,13 @@ class App extends React.Component {
           currentModule={this.state.currentModule}
           moduleState={this.state.moduleState}
         />
-        <Performance performance={this.state.performance} />
+        <Performance
+          performance={this.state.performance}
+          currentModule={this.state.currentModule}
+          currentConn={this.state.currentConn}
+          activePerformances={this.state.activePerformances}
+          setPerformance={(p) => this.setPerformance(p)}
+        />
       </div>
     );
   }

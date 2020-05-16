@@ -1,23 +1,24 @@
 export const performanceActionHash = {
   'performance-created': performanceCreatedAction,
   'performance-ended': performanceEndedAction,
-  'performance-joined': performanceJoinedAction
-}
+  'performance-joined': performanceJoinedAction,
+};
 
 async function performanceJoinedAction(params, component) {
   if (params.attendee) {
-    console.log(`${params.attendee.name} joined the audience`)
+    console.log(`${params.attendee.name} joined the audience`);
   } else if (params.currentConn.source === 'display') {
-    console.log('Display Connected')
+    console.log('Display Connected');
+  } else if (params.currentConn.source === 'control') {
+    component.setState({ ...params });
   }
-
 }
 async function performanceCreatedAction(params, component) {
-  console.log('Performance Created \n', params)
-  component.setState(params)
+  console.log('Performance Created \n', params);
+  component.setState(params);
 }
 
 async function performanceEndedAction(parms, component) {
-  console.log('Performance Ended')
-  component.setState({ performance: {}, currentModule: { module: {}, instance: {} } })
+  console.log('Performance Ended');
+  component.setState({ performance: {}, currentModule: { module: {}, instance: {} } });
 }
