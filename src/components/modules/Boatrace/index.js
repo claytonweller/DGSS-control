@@ -36,7 +36,7 @@ export function Boatrace({ moduleState, currentModule }) {
   };
 
   const selectCoxswains = () => {
-    client.send(JSON.stringify({ action: 'boatrace-select-cockswains', params: {} }));
+    client.send(JSON.stringify({ action: 'boatrace-select-cockswains', params: { currentModule } }));
   };
 
   let display = <button onClick={titleClick}>Title</button>;
