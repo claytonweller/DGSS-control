@@ -39,9 +39,35 @@ export function Boatrace({ moduleState, currentModule }) {
     client.send(JSON.stringify({ action: 'boatrace-select-cockswains', params: { currentModule } }));
   };
 
+  const meetYourCoxswain = () => {
+    return (
+      <div>
+        <button onClick={startNamingBoats}>Name Boats</button>
+      </div>
+    );
+  };
+
+  const startNamingBoats = () => {
+    client.send(JSON.stringify({ action: 'boatrace-start-naming-boats', params: { currentModule } }));
+  };
+
+  const openForNaming = () => {
+    return (
+      <div>
+        <button onClick={stopNamingBoats}>Stop Naming</button>
+      </div>
+    );
+  };
+
+  const stopNamingBoats = () => {
+    client.send(JSON.stringify({ action: 'boatrace-stop-naming-boats', params: { currentModule } }));
+  };
+
   let display = <button onClick={titleClick}>Title</button>;
   if (moduleState.step === 'title') display = boatButtons();
   if (moduleState.step === 'boarding') display = boarding();
+  if (moduleState.step === 'meet-your-coxswain') display = meetYourCoxswain();
+  if (moduleState.step === 'open-for-naming') display = openForNaming();
 
   return (
     <div>
