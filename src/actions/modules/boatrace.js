@@ -4,6 +4,11 @@ export const boatraceActionHash = {
   'boatrace-boat-boarded': boatBoardedAction,
   'boatrace-coxswains-selected': coxswainsSelectedAction,
   'boatrace-open-for-naming': openForNamingAction,
+  'boatrace-boat-named': boatNamedAction,
+  'boatrace-naming-closed': closeNamingAction,
+  'boatrace-display-boat-name': displayBoatNameAction,
+  'boatrace-instructions-completed': instructionsCompletedAction,
+  'boatrace-race-started': raceStartedAction,
 };
 
 function showTitleAction(params, component) {
@@ -45,6 +50,67 @@ function openForNamingAction(params, component) {
     moduleState: {
       ...component.state.moduleState,
       step: 'open-for-naming',
+    },
+  });
+}
+
+function boatNamedAction(params, component) {
+  const boats = component.state.moduleState.boats.map((b) => {
+    if (b.id === params.boat.id) {
+      return params.boat;
+    }
+    return b;
+  });
+
+  component.setState({
+    moduleState: {
+      ...component.state.moduleState,
+      boats,
+    },
+  });
+}
+
+function closeNamingAction(params, component) {
+  component.setState({
+    moduleState: {
+      ...component.state.moduleState,
+      boats: params.boats,
+      step: 'naming-closed',
+    },
+  });
+}
+
+function displayBoatNameAction(params, component) {
+  const boats = component.state.moduleState.boats.map((b) => {
+    if (b.id === params.boat.id) {
+      return params.boat;
+    }
+    return b;
+  });
+
+  component.setState({
+    moduleState: {
+      ...component.state.moduleState,
+      boats,
+    },
+  });
+}
+
+function instructionsCompletedAction(params, component) {
+  component.setState({
+    moduleState: {
+      ...component.state.moduleState,
+      step: 'ready-to-race',
+    },
+  });
+}
+
+function raceStartedAction(params, component) {
+  component.setState({
+    moduleState: {
+      ...component.state.moduleState,
+      step: 'racing',
+      boats: params.boats,
     },
   });
 }

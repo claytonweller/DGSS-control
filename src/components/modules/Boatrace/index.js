@@ -2,8 +2,8 @@ import React from 'react';
 import { client } from '../../..';
 
 export function Boatrace({ moduleState, currentModule }) {
-  const titleClick = () => {
-    client.send(JSON.stringify({ action: 'boatrace-title', params: {} }));
+  const sendAction = (actionName, additionalParams) => {
+    client.send(JSON.stringify({ action: actionName, params: { currentModule, ...additionalParams } }));
   };
 
   const boatButtons = () => {
@@ -13,7 +13,7 @@ export function Boatrace({ moduleState, currentModule }) {
       return (
         <div key={`boats-${num}`}>
           <div>BoatSize ~ {Math.floor(moduleState.audienceCount / num)}</div>
-          <button onClick={() => boatSizeClick(num)} value={num}>
+          <button onClick={() => sendAction('boatrace-create-boats', { boatCount: num })} value={num}>
             {num} Boats
           </button>
         </div>
@@ -22,52 +22,67 @@ export function Boatrace({ moduleState, currentModule }) {
     return buttons;
   };
 
-  const boatSizeClick = (num) => {
-    client.send(JSON.stringify({ action: 'boatrace-create-boats', params: { boatCount: num, currentModule } }));
-  };
-
   const boarding = () => {
     return (
       <div>
         <div>Boarding progress</div>
-        <button onClick={selectCoxswains}>Pick Cockswains</button>
+        <button onClick={() => sendAction('boatrace-select-cockswains')}>Pick Cockswains</button>
       </div>
     );
-  };
-
-  const selectCoxswains = () => {
-    client.send(JSON.stringify({ action: 'boatrace-select-cockswains', params: { currentModule } }));
   };
 
   const meetYourCoxswain = () => {
     return (
       <div>
-        <button onClick={startNamingBoats}>Name Boats</button>
+        <button onClick={() => sendAction('boatrace-start-naming-boats')}>Name Boats</button>
       </div>
     );
-  };
-
-  const startNamingBoats = () => {
-    client.send(JSON.stringify({ action: 'boatrace-start-naming-boats', params: { currentModule } }));
   };
 
   const openForNaming = () => {
     return (
       <div>
-        <button onClick={stopNamingBoats}>Stop Naming</button>
+        <button onClick={() => sendAction('boatrace-stop-naming-boats')}>Stop Naming</button>
       </div>
     );
   };
 
-  const stopNamingBoats = () => {
-    client.send(JSON.stringify({ action: 'boatrace-stop-naming-boats', params: { currentModule } }));
+  const namingClosed = () => {
+    const boats = moduleState.boats.map((b) => {
+      console.log(b);
+      return (
+        <div key={b.id}>
+          <span>{b.name}</span>
+          {b.state.nameIsVisible ? null : (
+            <button onClick={() => sendAction('boatrace-reveal-boat-name', { revealedBoat: b })}>Reveal</button>
+          )}
+        </div>
+      );
+    });
+    return (
+      <div>
+        <div>{boats}</div>
+        <button onClick={() => sendAction('boatrace-next-instruction')}>Instructions</button>
+      </div>
+    );
   };
 
-  let display = <button onClick={titleClick}>Title</button>;
+  const readyToRace = () => {
+    return <button onClick={() => sendAction('boatrace-start-race')}>START RACE!</button>;
+  };
+
+  const racing = () => {
+    return <button onClick={() => sendAction('boatrace-end-race')}>END RACE!</button>;
+  };
+
+  let display = <button onClick={() => sendAction('boatrace-title')}>Title</button>;
   if (moduleState.step === 'title') display = boatButtons();
   if (moduleState.step === 'boarding') display = boarding();
   if (moduleState.step === 'meet-your-coxswain') display = meetYourCoxswain();
   if (moduleState.step === 'open-for-naming') display = openForNaming();
+  if (moduleState.step === 'naming-closed') display = namingClosed();
+  if (moduleState.step === 'ready-to-race') display = readyToRace();
+  if (moduleState.step === 'racing') display = racing();
 
   return (
     <div>
