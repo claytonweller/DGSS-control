@@ -1,7 +1,7 @@
 import React from 'react';
 import { client } from '../../..';
 
-export function Boatrace({ moduleState, currentModule }) {
+export function Boatrace({ moduleState, nextModule, currentModule }) {
   const sendAction = (actionName, additionalParams) => {
     client.send(JSON.stringify({ action: actionName, params: { currentModule, ...additionalParams } }));
   };
@@ -68,7 +68,13 @@ export function Boatrace({ moduleState, currentModule }) {
   };
 
   const readyToRace = () => {
-    return <button onClick={() => sendAction('boatrace-start-race')}>START RACE!</button>;
+    const nextModuleButton = <button onClick={nextModule}>Next Module</button>;
+    return (
+      <div>
+        <button onClick={() => sendAction('boatrace-start-race')}>START RACE!</button>
+        {moduleState.raceComplete ? nextModuleButton : null}
+      </div>
+    );
   };
 
   const racing = () => {
