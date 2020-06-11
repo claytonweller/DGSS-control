@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trolly } from './Trolly/';
 import { Boatrace } from './Boatrace/';
 import { Preshow } from './Preshow/';
 import { Bootcamp } from './Bootcamp/';
@@ -17,6 +18,7 @@ export function Module({ currentModule, currentConn, moduleState }) {
   };
 
   const moduleHash = {
+    trolly: <Trolly moduleState={moduleState} />,
     boatrace: <Boatrace moduleState={moduleState} nextModule={nextModule} currentModule={currentModule} />,
     bootcamp: <Bootcamp currentConn={currentConn} nextModule={nextModule} moduleState={moduleState} />,
     preshow: <Preshow nextModule={nextModule} moduleState={moduleState} />,
