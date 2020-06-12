@@ -1,11 +1,6 @@
 import React from 'react';
-import { client } from '../../..';
 
-export function Boatrace({ moduleState, nextModule, currentModule }) {
-  const sendAction = (actionName, additionalParams) => {
-    client.send(JSON.stringify({ action: actionName, params: { currentModule, ...additionalParams } }));
-  };
-
+export function Boatrace({ moduleState, nextModule, sendAction }) {
   const boatButtons = () => {
     // TODO eventually the available numbers will be determined by the number of attendees
     const possibleNumbers = [2, 3, 4, 5];

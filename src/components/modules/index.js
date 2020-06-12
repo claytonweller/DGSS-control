@@ -17,9 +17,22 @@ export function Module({ currentModule, currentConn, moduleState }) {
     client.send(payload);
   };
 
+  const sendAction = (actionName, additionalParams) => {
+    client.send(
+      JSON.stringify({
+        action: actionName,
+        params: {
+          performance_id: currentConn.performance_id,
+          currentModule,
+          ...additionalParams,
+        },
+      })
+    );
+  };
+
   const moduleHash = {
-    trolly: <Trolly moduleState={moduleState} />,
-    boatrace: <Boatrace moduleState={moduleState} nextModule={nextModule} currentModule={currentModule} />,
+    trolly: <Trolly moduleState={moduleState} sendAction={sendAction} />,
+    boatrace: <Boatrace moduleState={moduleState} nextModule={nextModule} sendAction={sendAction} />,
     bootcamp: <Bootcamp currentConn={currentConn} nextModule={nextModule} moduleState={moduleState} />,
     preshow: <Preshow nextModule={nextModule} moduleState={moduleState} />,
     // TODO default will need some functionality at some point. To allow us to get into a module.

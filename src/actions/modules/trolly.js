@@ -1,8 +1,10 @@
+import { updateModuleState } from './';
 
 export const trollyActionHash = {
-  "trolly-template": templateAction,
+  'trolly-show-title': showTitleAction,
 };
 
-function templateAction(params, component) {
-  console.log("Template", params);
+function showTitleAction(params, component) {
+  console.log('Template', params);
+  updateModuleState(component, { step: 'title' });
 }
