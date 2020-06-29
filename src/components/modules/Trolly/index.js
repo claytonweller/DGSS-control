@@ -1,17 +1,10 @@
 import React from 'react';
+import { Problem } from './Problem';
+import { Madness } from './Madness';
 
 export function Trolly({ moduleState, sendAction }) {
-  const currentQuestion = () => {
-    const { currentQuestion: q } = moduleState;
-    if (q) {
-      const question = q.default.text + ' or ' + q.alternative.text + '?';
-      return <div>{question}</div>;
-    }
-  };
-
-  let display = <button onClick={() => sendAction('trolly-title')}>Title</button>;
-
   const questionClick = (defaultText, altText, timer) => {
+    console.log('q', defaultText, altText);
     const params = {
       options: {
         question: {
@@ -25,28 +18,14 @@ export function Trolly({ moduleState, sendAction }) {
     sendAction('trolly-question', params);
   };
 
-  const examples = () => {
-    return (
-      <div>
-        <div>
-          <button onClick={() => questionClick('5 people', '1 person', 999999)}>1 Basic</button>
-          <button onClick={() => questionClick('5 people', 'Snipe Trolly driver', 999999)}>2 Sniper</button>
-          <button onClick={() => questionClick('5 people', 'Shove person in front of Trolly', 999999)}>3 Shove</button>
-          <button onClick={() => questionClick('1 baby', '1 adult', 5000)}>4 Timer</button>
-        </div>
-        <div>
-          <button onClick={() => sendAction('trolly-madness')}>Madness</button>
-        </div>
-      </div>
-    );
-  };
-
-  if (moduleState.step === 'title') display = examples();
+  let display = <Problem moduleState={moduleState} sendAction={sendAction} questionClick={questionClick} />;
+  if (moduleState.step === 'madness') {
+    display = <Madness moduleState={moduleState} sendAction={sendAction} questionClick={questionClick} />;
+  }
 
   return (
     <div>
       <h3>Trolly</h3>
-      {currentQuestion()}
       {display}
     </div>
   );

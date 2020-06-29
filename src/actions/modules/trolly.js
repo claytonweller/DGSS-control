@@ -3,6 +3,8 @@ import { updateModuleState } from './';
 export const trollyActionHash = {
   'trolly-show-title': showTitleAction,
   'trolly-show-question': showQuestionsAction,
+  'trolly-madness-begins': madnessBeginsAction,
+  'trolly-madness-over': madnessOverAction,
 };
 
 function showTitleAction(params, component) {
@@ -10,6 +12,13 @@ function showTitleAction(params, component) {
 }
 
 function showQuestionsAction(params, component) {
-  console.log('Template', params);
   updateModuleState(component, { ...params });
+}
+
+function madnessBeginsAction(params, component) {
+  updateModuleState(component, { step: 'madness' });
+}
+
+function madnessOverAction(params, component) {
+  updateModuleState(component, { ...params, canClick: 'true' });
 }
