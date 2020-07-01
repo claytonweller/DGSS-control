@@ -17,7 +17,7 @@ export function Problem({ moduleState, sendAction, questionClick }) {
         <div>
           <button onClick={() => questionClick('5 people', '1 person', 999999)}>1 Basic</button>
           <button onClick={() => questionClick('5 people', 'Snipe Trolly driver', 999999)}>2 Sniper</button>
-          <button onClick={() => questionClick('5 people', 'Shove person in front of Trolly', 5000)}>3 Shove</button>
+          <button onClick={() => questionClick('5 people', 'Shove person in front of Trolly', 999999)}>3 Shove</button>
           <button onClick={() => questionClick('1 baby', '1 adult', 5000)}>4 Timer</button>
         </div>
         <div>

@@ -31,7 +31,7 @@ export function Module({ currentModule, currentConn, moduleState }) {
   };
 
   const moduleHash = {
-    trolly: <Trolly moduleState={moduleState} sendAction={sendAction} />,
+    trolly: <Trolly moduleState={moduleState} sendAction={sendAction} nextModule={nextModule} />,
     boatrace: <Boatrace moduleState={moduleState} nextModule={nextModule} sendAction={sendAction} />,
     bootcamp: <Bootcamp currentConn={currentConn} nextModule={nextModule} moduleState={moduleState} />,
     preshow: <Preshow nextModule={nextModule} moduleState={moduleState} />,

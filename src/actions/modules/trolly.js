@@ -20,5 +20,5 @@ function madnessBeginsAction(params, component) {
 }
 
 function madnessOverAction(params, component) {
-  updateModuleState(component, { ...params, canClick: 'true' });
+  updateModuleState(component, { ...params, madnessOver: true });
 }
