@@ -4,6 +4,7 @@ import { moduleActionHash } from './modules';
 
 export const manageMessage = async (message, component) => {
   console.log('Action: ', message.action);
+  console.warn('TEEEEEST --------', message);
 
   const action = Object.keys(actionHash).includes(message.action)
     ? actionHash[message.action]
