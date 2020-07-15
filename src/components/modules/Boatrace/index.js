@@ -2,7 +2,6 @@ import React from 'react';
 
 export function Boatrace({ moduleState, nextModule, sendAction }) {
   const boatButtons = () => {
-    // TODO eventually the available numbers will be determined by the number of attendees
     const possibleNumbers = [2, 3, 4, 5];
     const buttons = possibleNumbers.map((num) => {
       return (

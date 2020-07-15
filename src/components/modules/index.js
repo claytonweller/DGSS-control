@@ -1,4 +1,5 @@
 import React from 'react';
+import { Ttt } from './Ttt/';
 import { Trolly } from './Trolly/';
 import { Boatrace } from './Boatrace/';
 import { Preshow } from './Preshow/';
@@ -31,12 +32,12 @@ export function Module({ currentModule, currentConn, moduleState }) {
   };
 
   const moduleHash = {
+    ttt: <Ttt moduleState={moduleState} />,
     trolly: <Trolly moduleState={moduleState} sendAction={sendAction} nextModule={nextModule} />,
     boatrace: <Boatrace moduleState={moduleState} nextModule={nextModule} sendAction={sendAction} />,
     bootcamp: <Bootcamp currentConn={currentConn} nextModule={nextModule} moduleState={moduleState} />,
     preshow: <Preshow nextModule={nextModule} moduleState={moduleState} />,
-    // TODO default will need some functionality at some point. To allow us to get into a module.
-    default: <div>Default</div>,
+    default: <div>No Websockets detected</div>,
   };
 
   const currentModuleTitle = currentModule.module.title;
