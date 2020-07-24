@@ -18,7 +18,7 @@ export function Module({ currentModule, currentConn, moduleState }) {
     client.send(payload);
   };
 
-  const sendAction = (actionName, additionalParams) => {
+  const sendAction = (actionName, additionalParams = {}) => {
     client.send(
       JSON.stringify({
         action: actionName,
@@ -32,7 +32,7 @@ export function Module({ currentModule, currentConn, moduleState }) {
   };
 
   const moduleHash = {
-    ttt: <Ttt moduleState={moduleState} />,
+    ttt: <Ttt moduleState={moduleState} sendAction={sendAction} nextModule={nextModule} />,
     trolly: <Trolly moduleState={moduleState} sendAction={sendAction} nextModule={nextModule} />,
     boatrace: <Boatrace moduleState={moduleState} nextModule={nextModule} sendAction={sendAction} />,
     bootcamp: <Bootcamp currentConn={currentConn} nextModule={nextModule} moduleState={moduleState} />,

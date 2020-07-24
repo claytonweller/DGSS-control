@@ -1,8 +1,9 @@
+import { updateModuleState } from '.';
 
 export const tttActionHash = {
-  "ttt-template": templateAction,
+  'ttt-teams-created': teamsCreatedAction,
 };
 
-function templateAction(params, component) {
-  console.log("Template", params);
+function teamsCreatedAction(params, component) {
+  updateModuleState(component, { step: 'lobby', params });
 }
