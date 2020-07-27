@@ -18,5 +18,13 @@ export function Ttt({ moduleState, sendAction, nextModule }) {
       </div>
     );
 
+  if (moduleState.step === 'in-progress')
+    display = (
+      <div>
+        <button onClick={() => sendAction('ttt-next-round')}>Next Round</button>
+        <button onClick={() => sendAction('ttt-end-game', { height: 10, width: 10 })}>Force Quit</button>
+      </div>
+    );
+
   return <div>{display}</div>;
 }
