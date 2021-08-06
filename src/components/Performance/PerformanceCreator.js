@@ -1,6 +1,6 @@
 import React from 'react'
 import { client } from '../../'
-export function PerformanceCreator(params) {
+export function PerformanceCreator() {
 
   function createPerformanceClick() {
     const params = {
